@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Game-Dev Radar</title>
+<style>
+  :root { --bg:#0d1117; --card:#161b22; --border:#30363d; --fg:#e6edf3; --mut:#8b949e;
+          --acc:#58a6ff; --grn:#3fb950; --amb:#d29922; --pur:#bc8cff; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg);
+         font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+         line-height:1.5; }
+  .wrap { max-width:1080px; margin:0 auto; padding:20px 16px 60px; }
+  header { margin:8px 0 20px; }
+  header h1 { margin:0 0 4px; font-size:26px; }
+  header p { margin:0; color:var(--mut); font-size:14px; }
+  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin:20px 0; }
+  .stat { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px; }
+  .stat .n { font-size:28px; font-weight:700; }
+  .stat .l { font-size:12px; color:var(--mut); text-transform:uppercase; letter-spacing:.04em; }
+  h2 { font-size:18px; margin:32px 0 12px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:16px; margin:0 0 12px; }
+  .card h3 { margin:0 0 6px; font-size:16px; }
+  .card h3 a { color:var(--acc); text-decoration:none; }
+  .card h3 a:hover { text-decoration:underline; }
+  .meta { font-size:13px; color:var(--mut); margin-bottom:8px; }
+  .pill { display:inline-block; font-size:11px; font-weight:600; padding:2px 10px; border-radius:20px;
+          text-transform:uppercase; letter-spacing:.05em; margin-right:6px; }
+  .pill.analyzed { background:rgba(63,185,80,.15); color:var(--grn); border:1px solid rgba(63,185,80,.4); }
+  .pill.queued { background:rgba(210,153,34,.12); color:var(--amb); border:1px solid rgba(210,153,34,.4); }
+  .pill.proposed { background:rgba(88,166,255,.12); color:var(--acc); border:1px solid rgba(88,166,255,.4); }
+  .pill.prototyping { background:rgba(188,140,255,.12); color:var(--pur); border:1px solid rgba(188,140,255,.4); }
+  .pill.done { background:rgba(63,185,80,.15); color:var(--grn); border:1px solid rgba(63,185,80,.4); }
+  ul.tight { margin:8px 0 0; padding-left:20px; font-size:14px; }
+  ul.tight li { margin:3px 0; }
+  .sec-label { font-size:12px; color:var(--mut); text-transform:uppercase; letter-spacing:.06em; margin:10px 0 4px; }
+  footer { margin-top:40px; color:var(--mut); font-size:12px; }
+  .grid2 { display:grid; grid-template-columns:1fr; gap:0; }
+  @media (min-width:760px){ .grid2 { grid-template-columns:1fr 1fr; gap:12px; } .grid2 .card{ margin:0; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🤖 AI Game-Dev Radar</h1>
+    <p>Daily watch: AI-built games &amp; 3D experiences on YouTube → methodology vs IWSDK → proposals &amp; prototypes. <span id="updated"></span></p>
+  </header>
+  <div class="stats" id="stats"></div>
+
+  <h2>SDK Workflow Proposals</h2>
+  <div id="proposals"></div>
+
+  <h2>Content Ideas</h2>
+  <div id="content"></div>
+
+  <h2>Prototypes</h2>
+  <div id="prototypes"></div>
+
+  <h2>Videos</h2>
+  <div id="videos"></div>
+
+  <footer>Source of truth: private repo <code>ellyz2426/ai-game-dev-radar</code>. Updated daily ~7am PT.</footer>
+</div>
+<script>
+const DATA = {"content_ideas": [{"detail": "The space-game video is a proven format (multi-model agent swarm builds a game in a week, full methodology reveal). An IWSDK-native version \u2014 agents building a VR game with headless verification \u2014 would be distinctive: nobody is showing agentic VR game dev. Natural home: Felix's side content.", "id": "CONTENT-001", "source": "Z9fyPTQVEdI", "status": "proposed", "title": "'AI builds a VR game in IWSDK' video series"}], "proposals": [{"detail": "The video's creator generates all 3D via headless Blender bpy scripts driven by an orchestrator model (greybox first, then detail passes). Felix's modeling pipeline already does headless bpy, but it is bespoke to the asset library. Proposal: a documented, reusable IWSDK-side pattern/skill for headless-Blender asset generation (greybox \u2192 detail \u2192 judged renders), so any IWSDK agent workflow can produce game-ready 3D the same way.", "id": "SDK-001", "source": "Z9fyPTQVEdI", "status": "proposed", "title": "First-class headless-Blender asset workflow for IWSDK"}, {"detail": "Gauntlet Loop = builders + independent critic agents + numeric checks + screenshot inspection. IWSDK builds already do judged renders; proposal: standardize a verify loop (numeric measurement via bpy/ECS + screenshot inspection) as an IWSDK skill any agent workflow can invoke, instead of each project reinventing it.", "id": "SDK-002", "source": "Z9fyPTQVEdI", "status": "proposed", "title": "Standardized screenshot + numeric verification loop"}], "prototypes": [], "stats": {"content_ideas": 1, "prototypes": 0, "sdk_proposals": 2, "videos_analyzed": 1, "videos_queued": 15}, "updated": "2026-09-18T09:30:00-07:00", "videos": [{"channel": "Can It Code?", "date": "2026-09-18", "findings": ["SDK-001: first-class headless-Blender asset workflow in IWSDK", "SDK-002: screenshot + numeric verification loop", "CONTENT-001: 'AI builds a VR game in IWSDK' series"], "id": "Z9fyPTQVEdI", "iwskd_relevance": "Headless-Blender-via-generated-scripts mirrors Felix's modeling pipeline; palette contract maps to the unified asset-library palette; Gauntlet Loop maps to the judged pipeline with verdict_gate.", "methodology": ["8-color 'Color Bible' palette contract shared across all models", "Strong model as orchestrator only; fresh session per single testable task", "Gauntlet Loop: builders + independent critics + numeric checks", "Headless Blender bpy scripts for all 3D (greybox before detail)", "Numeric measurement + screenshot inspection for testing"], "status": "analyzed", "title": "AI Built This Space Game From Scratch \u2014 Here's Exactly How", "url": "https://www.youtube.com/watch?v=Z9fyPTQVEdI"}, {"channel": "Can It Code?", "id": "60i4swdPb5c", "status": "queued", "title": "I Made 2 AIs Build a Flight Simulator \u2014 One Looked Insane", "url": "https://www.youtube.com/watch?v=60i4swdPb5c"}, {"channel": "Can It Code?", "id": "cA_rxSe6t0o", "status": "queued", "title": "AI Built Me Minecraft on the Moon \u2014 So I Had to Destroy It", "url": "https://www.youtube.com/watch?v=cA_rxSe6t0o"}, {"channel": "Can It Code?", "id": "bhqlDh2tAt0", "status": "queued", "title": "Fable 5.1 Is an Absolute MONSTER (vs Opus 5)", "url": "https://www.youtube.com/watch?v=bhqlDh2tAt0"}, {"channel": "Dilmer Valecillos", "id": "eS0f7W6Y6cE", "status": "queued", "title": "I Built & Launched a VR/MR Game in 30 Days with AI!", "url": "https://www.youtube.com/watch?v=eS0f7W6Y6cE"}, {"channel": "\u2014", "id": "qZVM8m1jAiE", "status": "queued", "title": "MCP for Unity Pro \u2014 AI Builds a Game from an Empty Scene", "url": "https://www.youtube.com/watch?v=qZVM8m1jAiE"}, {"channel": "\u2014", "id": "3NYJCiNGZ2k", "status": "queued", "title": "I Built a 3D ARPG in Unity Using Bezi AI", "url": "https://www.youtube.com/watch?v=3NYJCiNGZ2k"}, {"channel": "\u2014", "id": "vy9Jk2GavLc", "status": "queued", "title": "Let's code! Starting up a 3D game from scratch with Claude.ai", "url": "https://www.youtube.com/watch?v=vy9Jk2GavLc"}, {"channel": "Developers Digest", "id": "OhTtCYA2z8A", "status": "queued", "title": "Build Interactive 3D Worlds With GPT-6 & Blender", "url": "https://www.youtube.com/watch?v=OhTtCYA2z8A"}, {"channel": "\u2014", "id": "zBaz6WypTis", "status": "queued", "title": "Human-Controlled AI for 3D Creation: Blender + Foundry Hosted Agents", "url": "https://www.youtube.com/watch?v=zBaz6WypTis"}, {"channel": "Ahad Animates", "id": "tXYs9zMbMgE", "status": "queued", "title": "I Turned 3 Images Into Game Assets Using AI | Triverse Artist Mesh", "url": "https://www.youtube.com/watch?v=tXYs9zMbMgE"}, {"channel": "\u2014", "id": "3Kqrdi6mi2w", "status": "queued", "title": "Making Game-Ready 3D Models with AI: From Concept to Final Asset", "url": "https://www.youtube.com/watch?v=3Kqrdi6mi2w"}, {"channel": "\u2014", "id": "A_pC-9346s0", "status": "queued", "title": "How I'm Using AI to Speed Up 3D Character Creation for Blender & Unreal", "url": "https://www.youtube.com/watch?v=A_pC-9346s0"}, {"channel": "Stefan_3D_AI", "id": "mNjBBO1gWFI", "status": "queued", "title": "I'm Building My Dream Game With AI - From Absolute Zero", "url": "https://www.youtube.com/watch?v=mNjBBO1gWFI"}, {"channel": "Naavik", "id": "sy362Pv3mCw", "status": "queued", "title": "How Game Devs Use AI Today", "url": "https://www.youtube.com/watch?v=sy362Pv3mCw"}, {"channel": "\u2014", "id": "LMu0QHzjsUY", "status": "queued", "title": "I Let AI Build a Full 2D Platformer in Unity \u2014 Here's What Happened", "url": "https://www.youtube.com/watch?v=LMu0QHzjsUY"}]};
+const $ = id => document.getElementById(id);
+$('updated').textContent = 'Last updated ' + new Date(DATA.updated).toLocaleString() + '.';
+const s = DATA.stats;
+$('stats').innerHTML = [
+  [s.videos_analyzed,'videos analyzed'],[s.videos_queued,'queued'],
+  [s.sdk_proposals,'SDK proposals'],[s.content_ideas,'content ideas'],[s.prototypes,'prototypes']
+].map(([n,l])=>`<div class="stat"><div class="n">${n}</div><div class="l">${l}</div></div>`).join('');
+const pill = t => `<span class="pill ${t}">${t}</span>`;
+$('proposals').innerHTML = DATA.proposals.filter(p=>p.id.startsWith('SDK')).map(p=>`
+  <div class="card"><h3>${p.title}</h3>
+  <div class="meta">${pill(p.status)} · from <a href="https://www.youtube.com/watch?v=${p.source}">${p.source}</a></div>
+  <p style="font-size:14px;margin:0">${p.detail}</p></div>`).join('') || '<p style="color:var(--mut)">None yet.</p>';
+$('content').innerHTML = DATA.content_ideas.map(p=>`
+  <div class="card"><h3>${p.title}</h3>
+  <div class="meta">${pill(p.status)} · from <a href="https://www.youtube.com/watch?v=${p.source}">${p.source}</a></div>
+  <p style="font-size:14px;margin:0">${p.detail}</p></div>`).join('') || '<p style="color:var(--mut)">None yet.</p>';
+$('prototypes').innerHTML = DATA.prototypes.map(p=>`
+  <div class="card"><h3><a href="${p.repo}">${p.title}</a></h3>
+  <div class="meta">${pill(p.status)}</div><p style="font-size:14px;margin:0">${p.detail}</p></div>`).join('')
+  || '<p style="color:var(--mut)">No prototypes yet — actionable proposals get built here.</p>';
+$('videos').innerHTML = DATA.videos.map(v=>`
+  <div class="card"><h3><a href="${v.url}">${v.title}</a></h3>
+  <div class="meta">${pill(v.status)} · ${v.channel||'—'}${v.date?' · analyzed '+v.date:''}</div>
+  ${v.methodology?`<div class="sec-label">Methodology</div><ul class="tight">${v.methodology.map(m=>`<li>${m}</li>`).join('')}</ul>`:''}
+  ${v.iwskd_relevance?`<div class="sec-label">IWSDK relevance</div><p style="font-size:14px;margin:0 0 4px">${v.iwskd_relevance}</p>`:''}
+  ${v.findings?`<div class="sec-label">Findings</div><ul class="tight">${v.findings.map(f=>`<li>${f}</li>`).join('')}</ul>`:''}
+  </div>`).join('');
+</script>
+</body>
+</html>
